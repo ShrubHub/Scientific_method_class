@@ -106,12 +106,12 @@ global_effect <- cbind(meeps_per_hour_temps,global_effect)
 ggplot(data = prediction, aes(x = temp_mean, y = Meeps, colour = device , fill = device))+
   geom_point()+
   geom_ribbon(aes( ymin = Q2.5, ymax = Q97.5 ),color = NA, alpha = 0.25)+
-  geom_line(aes( y = Estimate))+
+  geom_line(aes( y = Estimate),lwd = 0.75)+
   theme_classic()+
   labs(x = "Temp", y = "Meeps")+
   scale_color_viridis_d(option = "mako")+
   scale_fill_viridis_d(option = "mako")+
-  coord_cartesian(ylim=c(0,25))
+  coord_cartesian(ylim=c(0,25)) ## zooming in ! 
 
 ## The global effect - specific prediction
 ggplot(data = global_effect, aes(x = temp_mean, y = Meeps, colour = device , fill = device))+
