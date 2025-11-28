@@ -110,7 +110,8 @@ ggplot(data = prediction, aes(x = temp_mean, y = Meeps, colour = device , fill =
   theme_classic()+
   labs(x = "Temp", y = "Meeps")+
   scale_color_viridis_d(option = "mako")+
-  scale_fill_viridis_d(option = "mako")
+  scale_fill_viridis_d(option = "mako")+
+  coord_cartesian(ylim=c(0,25))
 
 ## The global effect - specific prediction
 ggplot(data = global_effect, aes(x = temp_mean, y = Meeps, colour = device , fill = device))+
