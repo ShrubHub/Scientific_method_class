@@ -3,6 +3,7 @@ library(data.table)
 library(lubridate)
 library(lme4)
 library(lmerTest)
+library(ggeffects)
 
 floody_times <- fread(file.path("data","flood","WELL_database2025.csv"))
 
@@ -64,6 +65,7 @@ ggplot(data = floody_times_summary, aes(x = DOY, y = mean_wl, color = wellname )
   geom_line()+
   theme_classic()+
   labs(x = "Day of Year", y = "Water Level")+
+  labs(color = "Well")+
   scale_color_viridis_d(option = "mako")
 
 # Create a figure of the trend in water level for the wells beluga, polarbear, muskox and tidewell only
@@ -74,12 +76,40 @@ ggplot(data = floody_times_filtered, aes(x = mean_maximum_wave_height_w, y = mea
   geom_point()+
   geom_smooth()+
   theme_classic()+
-  labs(x = "wave height", y = "Water Level")+
+  labs(x = "Wave height", y = "Water level")+
+  labs(color = "Well")+
   # add dashed line at y = 0.22
   geom_hline(yintercept = 0.22, linetype = "dashed")+
-  scale_color_viridis_d(option = "mako")
+  scale_color_viridis_d(option = "mako", end = 0.8)
 
 # Run a statistical model to test the effect of mean_maximum_wave_height_w on mean_wl, with wellname as a random effect
 model_flood_1 <- lmer(mean_wl ~ mean_maximum_wave_height_w + (1|wellname),
                       data = floody_times_filtered)
 summary(model_flood_1)
+
+# Plot the slope and error of model_flood_1 using the ggeffects package
+library(ggeffects)
+
+fit <- ggeffects::ggpredict(model_flood_1, terms = "mean_maximum_wave_height_w [all]")
+
+plot(fit) + theme_classic()
+
+# Add the raw data to the previous plot
+plot(fit) + 
+  geom_point(data = floody_times_filtered, aes(x = mean_maximum_wave_height_w, y = mean_wl, color = wellname))+
+  scale_color_viridis_d(option = "mako")
+
+# Add the raw data to the previous plot
+plot(fit) + 
+  geom_point(data = floody_times_filtered, aes(x = mean_maximum_wave_height_w, y = mean_wl, color = wellname), alpha = 0.7)+
+  scale_color_viridis_d(option = "mako", end = 0.8) +
+  labs(x = "Wave height (m)", y = "Water level (m)")+
+  # rename legend title to "Well Name"
+  labs(color = "Well")+
+  # remove title from plot
+  ggtitle("")+
+  theme_classic()
+
+# get rid of light colour in mako scale from viridis
+
+  
