@@ -60,7 +60,7 @@ library(brms)
 ##bad model
 model_meep_1 <- brm(Meeps ~ temp_mean,
                     data = meeps_per_hour_temps,
-                    backend = "cmdstanr", # only if pb
+                    #backend = "cmdstanr", # only if pb
                     iter = 1500,
                     warmup = 400,
                     chains = 3,
@@ -71,7 +71,7 @@ model_meep_1 <- brm(Meeps ~ temp_mean,
 model_meep_2 <- brm(Meeps ~ temp_mean + (temp_mean|device),
                     data = meeps_per_hour_temps,
                     family = poisson,
-                    backend = "cmdstanr", # only if pb
+                    #backend = "cmdstanr", # only if pb
                     iter = 1000,
                     warmup = 200,
                     chains = 3,
@@ -82,7 +82,7 @@ meeps_per_hour_temps$tim_h_char <- as.character(meeps_per_hour_temps$time_h)
 model_meep_3 <- brm(Meeps ~ poly(temp_mean,2) + (poly(temp_mean,2)|device)  +(1|tim_h_char),
                     data = meeps_per_hour_temps,
                     family = negbinomial,
-                    backend = "cmdstanr", # only if pb
+                    #backend = "cmdstanr", # only if pb
                     iter = 1000,
                     warmup = 200,
                     chains = 3,
