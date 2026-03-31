@@ -1,0 +1,21 @@
+---
+title: "Writing like a scientist"
+author: "Ciara Norton, ..."
+subtitle: "Blog posts on how to write great scientific papers"
+---
+
+
+## Chapter 1: How to write the best figure captions - Ciara Norton
+#### A picture's worth 1000 words - literally! In this chapter readers will learn how to engage readers in their research through stunning figures. We will cover how to both create figures that effectively communicate research findings and write descriptive captions that hammer home their results. 
+
+## Chapter 2: How to write a great outline - Claire Ethier
+#### Claire add description of chapter here
+
+## Chapter 3: Punchy discussions and takeaway messages - Alex Beauchemin
+#### Alex add description of chapter here
+
+## Chapter 4: How to give good peer feedback! - Ingrid Janzen
+#### Ingrid add description of chapter here
+
+## Chapter 5: How to write a good introduction section - Angie Kellas
+#### Angie add description of chapter here
